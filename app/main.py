@@ -1,10 +1,14 @@
+import time
 import random
-
+import psycopg
 import uvicorn
 from fastapi import FastAPI, Body, Response, status, HTTPException
 from pydantic import BaseModel
 from typing import Optional
+import logging
 
+
+logger = logging.getLogger(__name__)
 app = FastAPI()
 post_database = [{
         "title": "title of post 1",
@@ -32,6 +36,22 @@ class Post(BaseModel):
     content: str
     published: bool = True
     rating: Optional[int] = None
+
+
+retry = 0
+while retry < 3:
+    try:
+        conn = psycopg.connect(host="localhost", dbname="adventureworks", port="5432",
+                               user="postgres", password="")
+        logger.info('Successfully connected to adventure words database')
+        with conn.cursor() as cursor:
+            cursor.execute("SELECT * FROM humanresources.employee").fetchone()
+            for record in cursor:
+                print(record)
+        break
+    except Exception as e:
+        logger.error(f'Failed to connect to adventure works database with exception {e}')
+        time.sleep(2)
 
 
 def find_post(pid):
