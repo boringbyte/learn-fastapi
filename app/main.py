@@ -6,8 +6,8 @@ from fastapi import FastAPI, Body, Response, status, HTTPException
 from pydantic import BaseModel
 from typing import Optional
 import logging
-
-
+# https://github.com/Kludex/awesome-fastapi-projects
+# https://github.com/mjhea0/awesome-fastapi
 logger = logging.getLogger(__name__)
 app = FastAPI()
 post_database = [{
