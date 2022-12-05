@@ -1,9 +1,16 @@
 """
     * We can declare path "parameters" or "variables" with the same syntax used by Python format strings:
-    * Path parameters with types gives us editor support inside the function, with error checks, completion, etc.
+    * Path parameters with types gives us, editor support inside the function, with error checks, completion, etc.
       Type declaration gives us automatic request "parsing".
     * This also helps with data validation. All the data validation is performed under the hood by Pydantic.
-    * Create an Enum class. You could also access the value "lenet" with ModelName.lenet.value.
+      If you pass '3' instead of 3 to read_item, we will see type_error.integer.
+      Same thing happens if we pass float instead of int. All the validation under the hood are performed by pydantic.
+    * Order matters, when creating path operations. '/users/me', '/users/{user_id} are defined in order, then for any
+      input value, the api will not call '/users/{user_id}' as it would match '/users/me 'as well, thinking that it's
+      receiving a parameter user_id with a value of 'me'.
+    * Create an Enum class for predefined values. This will provide us with drop down selection in the apidocs.
+      By inheriting from str the API docs will be able to know that the values must be of type string and will be able to render correctly.
+      You could also access the value "lenet" with ModelName.lenet.value.
     * Path parameters containing paths. Using an option directly from Starlette you can declare a path parameter
       containing a path using a URL like below. In this case, the name of the parameter is file_path, and the last part,
       :path, tells it that the parameter should match any path.
