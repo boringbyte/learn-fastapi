@@ -3,7 +3,14 @@
     - A request body is data sent by the client to your API. A response body is the data your API sends to the client.
     - Your API almost always has to send a response body. But clients don't necessarily need to send request bodies all
       the time.
-    - We can also declare body, path and query parameters, all at the same time.
+    - We can declare body, path and query parameters, all at the same time.
+    - All the optional rules are very similar to query parameters. If default is defined, then those attributes become
+      optional like 'description' and 'tax' in 'Item' Model.
+    - Schema is generated in the apidocs at the bottom of the page.
+    -The function parameters will be recognized as follows:
+        - If the parameter is also declared in the path, it will be used as a path parameter.
+        - If the parameter is of a singular type (like int, float, str, etc.) it will be interpreted as a query parameter.
+        - If the parameter is declared to be of the type Pydantic model, it will be interpreted as a request body.
 """
 import uvicorn
 from fastapi import FastAPI
@@ -26,7 +33,7 @@ async def create_item(item_id: int, item: Item, q: str | None = None):
     if item.tax:
         price_with_tax = item.price + item.tax
         item_dict.update({"price_with_tax": price_with_tax})
-    result = {"item_id": item_id, **item_dict}
+    result = {"item_id": item_id, **item.dict()}
     if q:
         result.update({"q": q})
     return result

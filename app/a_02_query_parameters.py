@@ -1,6 +1,8 @@
 """
     - When you declare other function parameters that are not part of the path parameters, they are automatically
       interpreted as "query" parameters.
+    - But when you declare them with Python types (in the example above, as int), they are converted to that type and
+      validated against it.
     - All the same process that applied for path parameters also applies for query parameters:
         Editor support
         Data parsing
@@ -8,7 +10,8 @@
         Automatic documentation
     - As query parameters are not a fixed part of a path, they can be optional and can have default values.
     - If we don't specify default value to query parameters, they become required query parameters.
-    -
+    - We can declare multiple path parameters and query parameters at the same time, FastAPI knows which is which.
+    - We don't have to declare them in any specific order. They will be detected by name.
 """
 import uvicorn
 from fastapi import FastAPI

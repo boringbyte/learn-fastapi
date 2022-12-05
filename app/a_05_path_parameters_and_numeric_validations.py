@@ -1,4 +1,7 @@
 """
+    - Validations are valid for both Path and Query class. Both String and Numeric validations.
+    - When you import Query, Path and others from fastapi, they are actually functions.
+    - That when called, return instances of classes of the same name.
     - A path parameter is always required as it has to be part of the path.
         - title
         - ge --> greater than or equal to
