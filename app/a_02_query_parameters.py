@@ -1,7 +1,7 @@
 """
     - When you declare other function parameters that are not part of the path parameters, they are automatically
       interpreted as "query" parameters.
-    - But when you declare them with Python types (in the example above, as int), they are converted to that type and
+    - But when you declare them with Python types (in the example below, as int), they are converted to that type and
       validated against it.
     - All the same process that applied for path parameters also applies for query parameters:
         Editor support
