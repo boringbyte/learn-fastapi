@@ -1,6 +1,6 @@
 """
-    - Image is used as a subtype in Item class
-    - special types and validation like HttpURL
+    - Image is used as a subtype in Item model
+    - Special types and validation like HttpURL
     - BaseModel, HttpUrl, Field, Required are imported from pydantic
     - Have in mind that JSON only supports str as keys. But Pydantic has automatic data conversion.
       This means that, even though your API clients can only send strings as keys, as long as those strings contain
@@ -43,17 +43,17 @@ async def update_item(item_id: int, item: Item):
 
 
 @app.post("/offers/")
-async def create_offer(offer: Offer):
+async def create_offer(offer: Offer):  # Deeply nested models in the body
     return offer
 
 
 @app.post("/images/multiple/")
-async def create_multiple_images(images: list[Image]):
+async def create_multiple_images(images: list[Image]):  # Bodies of pure lists
     return images
 
 
 @app.post("/index-weights/")
-async def create_index_weights(weights: dict[int, float]):
+async def create_index_weights(weights: dict[int, float]):  # Bodies of arbitrary dict
     return weights
 
 

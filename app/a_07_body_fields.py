@@ -9,6 +9,7 @@
         - ge
         - le
     - Extra keys passed to Field will also be present in the resulting OpenAPI schema for your application.
+    - You can use Pydantic's Field to declare extra validations and metadata for model attributes.
 """
 import uvicorn
 from fastapi import Body, FastAPI

@@ -5,7 +5,6 @@
     - Body also has all the same extra validation and metadata parameters as Query,Path and others you will see later.
     - You can add multiple body parameters to your path operation function, even though a request can only have a
       single body.
-
 """
 import uvicorn
 from fastapi import FastAPI, Path, Body
