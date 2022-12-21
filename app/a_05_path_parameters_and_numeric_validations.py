@@ -1,7 +1,7 @@
 """
     - Validations are valid for both Path and Query class. Both String and Numeric validations.
     - When you import Query, Path and others from fastapi, they are actually functions.
-    - That when called, return instances of classes of the same name.
+    - When called, they return instances of classes of the same name.
     - A path parameter is always required as it has to be part of the path.
         - title
         - ge --> greater than or equal to
@@ -9,15 +9,15 @@
         - gt --> greater than
         - lt
         - These validations can be used for number type in Query parameters as well.
-    - Order the parameters as you need
     - Order the parameters as you need, tricks.
+        - Python will complain if you put a value with a "default" before a value that doesn't have a "default".
         - If you want to declare the q query parameter without a Query nor any default value, and the path parameter
           item_id using Path, and have them in a different order, Python has a little special syntax for that.
         - Pass *, as the first parameter of the function.
         - Python won't do anything with that *, but it will know that all the following parameters should be called as
           keyword arguments (key-value pairs), also known as kwargs. Even if they don't have a default value.
-    - Query, Path, and others are subclasses of a common Param class. All of them share the same all these same
-      parameters of additional validation and metadata you have seen.
+    - Query, Path, and others are subclasses of a common Param class. All of them share the same parameters for
+      additional validation and metadata you have seen.
     - When you import Query, Path and others from fastapi, they are actually functions. That when called, return
       instances of classes of the same name.
 """

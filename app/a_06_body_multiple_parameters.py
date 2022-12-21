@@ -3,6 +3,8 @@
     - The same way there is a Query and Path to define extra data for query and path parameters, 
       FastAPI provides an equivalent Body.
     - Body also has all the same extra validation and metadata parameters as Query,Path and others you will see later.
+    - You can add multiple body parameters to your path operation function, even though a request can only have a
+      single body.
 
 """
 import uvicorn
@@ -25,11 +27,11 @@ class User(BaseModel):
     full_name: str | None = None
 
 
-@app.put("/items/{item_id}")
-async def update_item(*,
-                      item_id: int = Path(title="The ID of the item to get", ge=0, le=100),
-                      q: str | None = None,
-                      item: Item | None = None):
+@app.put("/items1/{item_id}")
+async def update_item1(*,
+                       item_id: int = Path(title="The ID of the item to get", ge=0, le=100),
+                       q: str | None = None,
+                       item: Item | None = None):
     results = {"item_id": item_id}  # path parameter
     if q:
         results.update({"q": q})  # query parameter
