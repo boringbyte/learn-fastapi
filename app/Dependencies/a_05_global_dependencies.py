@@ -1,5 +1,5 @@
 """
-For some types of applications you might want to add dependencies to the whole application.
+    For some types of applications you might want to add dependencies to the whole application.
 """
 import uvicorn
 from fastapi import FastAPI, Depends, Header, HTTPException

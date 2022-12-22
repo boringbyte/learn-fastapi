@@ -1,13 +1,13 @@
 """
-In the previous example, we were returning a dict from our dependency ("dependable"):
-The key factor is that a dependency should be a "callable".
-A "callable" in Python is anything that Python can "call" like a function.
-So, if you have an object something (that might not be a function) and you can "call" it (execute it) like:
-But you see that we are having some code repetition here, writing CommonQueryParams twice:
-Instead of writing:
-    commons: CommonQueryParams = Depends(CommonQueryParams)
-...you write:
-    commons: CommonQueryParams = Depends()
+    In the previous example, we were returning a dict from our dependency ("dependable"):
+    The key factor is that a dependency should be a "callable".
+    A "callable" in Python is anything that Python can "call" like a function.
+    So, if you have an object something (that might not be a function) and you can "call" it (execute it) like:
+    But you see that we are having some code repetition here, writing CommonQueryParams twice:
+    Instead of writing:
+        commons: CommonQueryParams = Depends(CommonQueryParams)
+    ...you write:
+        commons: CommonQueryParams = Depends()
 """
 import uvicorn
 from fastapi import FastAPI, Depends

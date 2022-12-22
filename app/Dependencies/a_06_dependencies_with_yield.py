@@ -1,7 +1,7 @@
 """
-FastAPI supports dependencies that do some extra steps after finishing. To do this, use yield instead of return,
-and write the extra steps after.
-You can have sub-dependencies and "trees" of sub-dependencies of any size, shape, and any or all of them can use yield.
+    FastAPI supports dependencies that do some extra steps after finishing. To do this, use yield instead of return,
+    and write the extra steps after.
+    You can have sub-dependencies and "trees" of sub-dependencies of any size, shape, and any or all of them can use yield.
 """
 import uvicorn
 from fastapi import FastAPI, Depends

@@ -1,16 +1,16 @@
 """
-"Dependency Injection" means, in programming, that there is a way for your code (in this case, your path operation
-functions) to declare things that it requires to work and use: "dependencies".
-And then, that system (in this case FastAPI) will take care of doing whatever is needed to provide your code with those
-needed dependencies ("inject" the dependencies).
+    "Dependency Injection" means, in programming, that there is a way for your code (in this case, your path operation
+    functions) to declare things that it requires to work and use: "dependencies".
+    And then, that system (in this case FastAPI) will take care of doing whatever is needed to provide your code with those
+    needed dependencies ("inject" the dependencies).
 
-This is very useful when you need to:
-    - Have shared logic (the same code logic again and again).
-    - Share database connections.
-    - Enforce security, authentication, role requirements, etc.
-    - And many other things...
+    This is very useful when you need to:
+        - Have shared logic (the same code logic again and again).
+        - Share database connections.
+        - Enforce security, authentication, role requirements, etc.
+        - And many other things...
 
-You only give Depends a single parameter. This parameter must be something like a function.
+    You only give 'Depends' a single parameter. This parameter must be something like a function.
 """
 import uvicorn
 from fastapi import FastAPI, Depends

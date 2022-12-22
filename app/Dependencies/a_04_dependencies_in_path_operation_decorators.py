@@ -1,11 +1,11 @@
 """
-In some cases you don't really need the return value of a dependency inside your path operation function.
-Or the dependency doesn't return a value. But you still need it to be executed/solved.
-For those cases, instead of declaring a path operation function parameter with Depends, you can add a list of
-dependencies to the path operation decorator.
-It should be a list of Depends(): These dependencies will be executed/solved the same way normal dependencies.
-    But their value (if they return any) won't be passed to your path operation function.
-And they can return values or not, the values won't be used.
+    In some cases you don't really need the return value of a dependency inside your path operation function.
+    Or the dependency doesn't return a value. But you still need it to be executed/solved.
+    For those cases, instead of declaring a path operation function parameter with Depends, you can add a list of
+    dependencies to the path operation decorator.
+    It should be a list of 'Depends()': These dependencies will be executed/solved the same way normal dependencies.
+        But their value (if they return any) won't be passed to your path operation function.
+    And they can return values or not, the values won't be used.
 """
 import uvicorn
 from fastapi import Depends, FastAPI, Header, HTTPException

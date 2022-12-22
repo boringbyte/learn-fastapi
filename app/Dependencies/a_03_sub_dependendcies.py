@@ -1,7 +1,7 @@
 """
-You can create dependencies that have sub-dependencies. They can be as deep as you need them to be.
-If one of your dependencies is declared multiple times for the same path operation, for example, multiple dependencies
-have a common sub-dependency, FastAPI will know to call that sub-dependency only once per request.
+    You can create dependencies that have sub-dependencies. They can be as deep as you need them to be.
+    If one of your dependencies is declared multiple times for the same path operation, for example, multiple dependencies
+    have a common sub-dependency, FastAPI will know to call that sub-dependency only once per request.
 """
 import uvicorn
 from fastapi import Cookie, Depends, FastAPI
