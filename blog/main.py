@@ -3,6 +3,8 @@ from fastapi import FastAPI, Depends, status, Response, HTTPException
 from blog import schemas, models
 from database import engine, SessionLocal
 from sqlalchemy.orm import Session
+from typing import List
+
 
 app = FastAPI()
 models.Base.metadata.create_all(engine)
@@ -45,13 +47,13 @@ def update(id: int, request: schemas.Blog, db: Session = Depends(get_db)):
     return 'Update completed'
 
 
-@app.get('/blogs')
+@app.get('/blogs', response_model=List[schemas.ShowBlog])
 def all(db: Session = Depends(get_db)):
     blogs = db.query(models.Blog).all()
     return blogs
 
 
-@app.get('/blog/{id}', status_code=status.HTTP_200_OK)
+@app.get('/blog/{id}', status_code=status.HTTP_200_OK, response_model=schemas.ShowBlog)
 def show(id: int, response: Response, db: Session = Depends(get_db)):
     blog = db.query(models.Blog).filter(models.Blog.id == id).first()
     if not blog:
