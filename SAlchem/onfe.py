@@ -1,4 +1,5 @@
 # https://www.youtube.com/watch?v=1Va493SMTcY
+# https://github.com/zzzeek/sqla_tutorial/tree/master/slides
 from sqlalchemy import create_engine, text
 
 
@@ -28,7 +29,7 @@ with engine.connect() as conn:
     # write the sql statements. This doesn't autocommit
     pass
 
-with engine.begin():
+with engine.begin() as conn:
     # write the sql statements. This does autocommit and closes the connection.
     pass
 
