@@ -2,8 +2,20 @@ from sqlalchemy import create_engine, text
 from sqlalchemy.orm import Session
 
 
+"""
+Establishing Connectivity - the Engine:
+    sqlite      --> Refers to the type of database that we are communicating with.
+    pysqlite    --> Refers to the DBAPI (third party driver that SQLAlchemy uses to interact with a particular DB.
+    ///:memory: --> Location of the sample database (URL)
+    echo        --> Prints the logs
+    future      --> Uses 2.0 version syntax instead of 1.X syntax
+    
+    Create Engine Object:
+    Engine object acts as a central source of connections to a particular database, providing both a factory as well 
+    as a holding space called a connection pool for these database connections.
+"""
 SQLALCHEMY_DATABASE_URL = 'sqlite+pysqlite:////home/siva/Desktop/Projects/learn-fastapi/SAlchem/sample.db'
-engine = create_engine(SQLALCHEMY_DATABASE_URL, echo=True)
+engine = create_engine(SQLALCHEMY_DATABASE_URL, echo=True, future=True)
 
 
 if __name__ == '__main__':
