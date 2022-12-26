@@ -13,6 +13,7 @@ Establishing Connectivity - the Engine:
     Create Engine Object:
     Engine object acts as a central source of connections to a particular database, providing both a factory as well 
     as a holding space called a connection pool for these database connections.
+    When using the ORM, the Engine is managed by another object called the Session.
 """
 SQLALCHEMY_DATABASE_URL = 'sqlite+pysqlite:////home/siva/Desktop/Projects/learn-fastapi/SAlchem/sample.db'
 engine = create_engine(SQLALCHEMY_DATABASE_URL, echo=True, future=True)
@@ -32,11 +33,13 @@ if __name__ == '__main__':
             text("INSERT INTO some_table (x, y) VALUES (:x, :y)"),
             [{'x': 1, 'y': 1}, {'x': 2, 'y': 4}],
         )
+        conn.commit()  # This style is called commit as you go. Issue explict commit as you go inside with block
         result = conn.execute(text("SELECT * FROM some_table"))
         print(result.all())
 
     # This style may be referred towards as begin once connection and will serve as block of SQL statements commit
-    # within the 'with engine.begin()' block.
+    # within the 'with engine.begin()' block. Successfully commits if there are no exceptions or will roll back if
+    # there are exceptions.
     with engine.begin() as conn:
         conn.execute(
             text("INSERT INTO some_table (x, y) VALUES (:x, :y)"),
@@ -56,7 +59,7 @@ if __name__ == '__main__':
         # Integer Index
         result = conn.execute(text("SELECT x, y FROM some_table"))
         for row in result:
-            x, y = row
+            x, y = row[0], row[1]
             print(x, y)
 
         # Attribute Name
@@ -71,7 +74,7 @@ if __name__ == '__main__':
             y = dict_row['y']
             print(x, y)
 
-    # Sending Parameters
+    # Sending Parameters, Add dictionary with params as second argument to text function.
     with engine.connect() as conn:
         result = conn.execute(text("SELECT x, y FROM some_table WHERE y > :y"), {"y": 2})
         for row in result:
@@ -81,7 +84,7 @@ if __name__ == '__main__':
     with engine.connect() as conn:
         conn.execute(
             text("INSERT INTO some_table (x, y) VALUES (:x, :y)"),
-            [{"x": 11, "y": 121}, {"x": 12, "y": 144}],
+            [{"x": 11, "y": 121}, {"x": 12, "y": 144}],  # Use list of dictionaries
         )
 
     # Executing with an ORM Session
