@@ -2,6 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy import MetaData, Table, Column  # These are common foundational objects for db metadata in SQLAlchemy
 from sqlalchemy import Integer, String, ForeignKey
 from sqlalchemy.orm import registry, declarative_base, relationship
+from engine_main import SQLALCHEMY_DATABASE_URL
 
 
 # Setting up MetaData with Table Objects.
@@ -102,10 +103,7 @@ class Address(Base):
 # Table reflection refers to the process of generating Table and related objects by reading the current state of a
 # database. Whereas in the previous sections we’ve been declaring Table objects in Python and then emitting DDL to the
 # database, the reflection process does it in reverse.
-
-
 if __name__ == '__main__':
-    SQLALCHEMY_DATABASE_URL = 'sqlite+pysqlite:////home/siva/Desktop/Projects/learn-fastapi/SAlchem/sample.db'
     engine = create_engine(SQLALCHEMY_DATABASE_URL, echo=True)
     print(user_table.c.name)  # To get details about column name 'name' from table
     print(user_table.c.keys())  # To get list of columns in the table

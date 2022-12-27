@@ -1,3 +1,5 @@
+# https://www.fullstackpython.com/sqlalchemy.html
+# https://github.com/crazyguitar/pysheeet/blob/master/docs/notes/python-sqlalchemy.rst --> cheat sheet
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import Session
 
