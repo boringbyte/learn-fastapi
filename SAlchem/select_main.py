@@ -1,7 +1,7 @@
 from sqlalchemy import select, create_engine
 from sqlalchemy.orm import Session
 from metadata_main import user_table, User, Address
-from practice_main import SQLALCHEMY_DATABASE_URL
+from engine_main import SQLALCHEMY_DATABASE_URL
 
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL, echo=True)

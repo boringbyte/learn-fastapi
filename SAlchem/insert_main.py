@@ -1,13 +1,13 @@
-from sqlalchemy import insert, create_engine, select
+# This file is about inserting rows with Core
+from sqlalchemy import create_engine, select, insert
 from metadata_main import user_table, address_table, metadata_obj
-from practice_main import SQLALCHEMY_DATABASE_URL
-
+from engine_main import SQLALCHEMY_DATABASE_URL
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL, echo=True)
-stmt = insert(user_table).values(name="spongebob", fullname="Spongebob Squarepants")
 
 
 if __name__ == '__main__':
+    stmt = insert(user_table).values(name="spongebob", fullname="Spongebob Squarepants")  # Using named tuple format
     print(stmt)
     compiled = stmt.compile()
     print(compiled.params)
@@ -24,7 +24,7 @@ if __name__ == '__main__':
                 {"name": "sandy", "fullname": "Sandy Cheeks"},
                 {"name": "patrick", "fullname": "Patrick Star"}
             ]
-        )
+        )  # using list of dictionary format
         print(result.inserted_primary_key_rows)
 
     # Insert... from Select
