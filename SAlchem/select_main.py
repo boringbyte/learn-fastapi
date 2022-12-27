@@ -198,3 +198,58 @@ if __name__ == '__main__':
     print('-' * 50)
 
     # Subqueries and CTEs
+    subq1 = (select(func.count(address_table.c.id).label("count"), address_table.c.user_id)
+             .group_by(address_table.c.user_id)
+             .subquery())
+    print(subq1)
+    print('-' * 50)
+    print(select(subq1.c.user_id, subq1.c.count))
+    print('-' * 50)
+    stmt8 = select(user_table.c.name, user_table.c.fullname, subq1.c.count).join_from(user_table, subq1)
+    print(stmt8)
+    print('-' * 50)
+
+    # Common Table Expressions (CTEs)
+    subq2 = (select(func.count(address_table.c.id).label("count"), address_table.c.user_id)
+             .group_by(address_table.c.user_id)
+             .cte())
+    stmt9 = select(user_table.c.name, user_table.c.fullname, subq2.c.count).join_from(user_table, subq2)
+    print(stmt9)
+    print('-' * 50)
+
+    # ORM Entity Subqueries/CTEs
+    subq3 = select(Address).where(~Address.email_address.like("%@aol.com")).subquery()
+    address_subq = aliased(Address, subq3)
+    stmt10 = (
+        select(User, address_subq)
+        .join_from(User, address_subq)
+        .order_by(User.id, address_subq.id)
+    )
+    with Session(engine) as session:
+        for user, address in session.execute(stmt10):
+            print(f"{user} {address}")
+    print('-' * 50)
+
+    cte_obj = select(Address).where(~Address.email_address.like("%@aol.com")).cte()
+    address_cte = aliased(Address, cte_obj)
+    stmt = (
+        select(User, address_cte)
+        .join_from(User, address_cte)
+        .order_by(User.id, address_cte.id)
+    )
+    with Session(engine) as session:
+        for user, address in session.execute(stmt):
+            print(f"{user} {address}")
+    print('-' * 50)
+
+    # Scalar and Correlated Subqueries
+    # A scalar subquery is a subquery that returns exactly zero or one row and exactly one column.
+    subq3 = (
+        select(func.count(address_table.c.id))
+        .where(user_table.c.id == address_table.c.user_id)
+        .scalar_subquery()
+    )
+    print(subq3)
+    print('-' * 50)
+    print(subq3 == 5)
+    print('-' * 50)
